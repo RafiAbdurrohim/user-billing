@@ -1,0 +1,310 @@
+<?php
+session_start();
+// Simulasi data user
+$_SESSION['nama'] = 'User Neko';
+$_SESSION['nis'] = '12345';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BilingPro - Platform Bimbingan Siswa Modern</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3a6ea5;
+            --secondary-color: #ff6b6b;
+            --background-color: #2c3e50;
+            --card-bg: #34495e;
+            --text-color: #ecf0f1;
+            --text-muted: #bdc3c7;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        #sidebar {
+            background-color: #243342;
+            min-width: 250px;
+            max-width: 250px;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+        #sidebar .nav-link {
+            color: var(--text-muted);
+        }
+        #sidebar .nav-link:hover, #sidebar .nav-link.active {
+            color: var(--text-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .navbar {
+            display: none;
+            background-color: #243342 !important;
+        }
+        .content {
+            width: 100%;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-custom {
+            background-color: var(--secondary-color);
+            border: none;
+            color: var(--text-color);
+        }
+        .btn-custom:hover {
+            background-color: #e74c3c;
+            color: var(--text-color);
+        }
+        @media (max-width: 767.98px) {
+            #sidebar {
+                display: none;
+            }
+            .navbar {
+                display: block;
+            }
+            .content {
+                margin-left: 0 !important;
+            }
+        }
+        .hero-banner {
+            background: linear-gradient(45deg, #3a6ea5, #ff6b6b);
+            padding: 50px 0;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+        }
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        #notifications {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+    <!-- Sidebar for desktop -->
+    <div id="sidebar">
+        <div class="p-4">
+            <h3 class="text-white">Biling</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="bimbinganswa.php"><i class='bx bxs-food-menu'></i> Bimbingan Konseling</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pengaduanswa.php"><i class='bx bxs-message-dots'></i> Pengaduan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="bakatswa.php"><i class='bx bxs-group'></i> Bakat & Minat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profileswa.php"><i class='bx bxs-universal-access'></i> Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php"><i class='bx bxs-log-out-circle'></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Navbar for mobile -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Biling</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bimbinganswa.php"><i class='bx bxs-food-menu'></i> Bimbingan Konseling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pengaduanswa.php"><i class='bx bxs-message-dots'></i> Pengaduan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bakatswa.php"><i class='bx bxs-group'></i> Bakat & Minat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profileswa.php"><i class='bx bxs-universal-access'></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class='bx bxs-log-out-circle'></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="content p-4">
+        <h2 class="mb-4">Dashboard Siswa</h2>
+        
+        <!-- Hero Banner -->
+        <div class="hero-banner text-center text-white mb-4">
+            <h1>Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?>!</h1>
+            <p>Mulai perjalanan bimbingan dan pengembangan dirimu bersama BilingPro</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+            <div class="col">
+                <div class="card feature-card h-100">
+                    <i class='bx bxs-calendar'></i>
+                    <h5>Sesi Mendatang</h5>
+                    <p class="display-6">3</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card feature-card h-100">
+                    <i class='bx bxs-star'></i>
+                    <h5>Poin Prestasi</h5>
+                    <p class="display-6">250</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card feature-card h-100">
+                    <i class='bx bxs-task'></i>
+                    <h5>Tugas Selesai</h5>
+                    <p class="display-6">18/20</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Perkembangan Mingguan</h5>
+                <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="card-text">Kamu sudah 75% mencapai target minggu ini. Pertahankan!</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Upcoming Activities -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Aktivitas Mendatang</h5>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Sesi Konseling dengan Bu Siti</h6>
+                                    <small class="text-muted">Kamis, 10:00 WIB</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">2 hari lagi</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Workshop Pengembangan Diri</h6>
+                                    <small class="text-muted">Sabtu, 09:00 WIB</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">4 hari lagi</span>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Deadline Proyek Akhir</h6>
+                                    <small class="text-muted">Senin, 23:59 WIB</small>
+                                </div>
+                                <span class="badge bg-danger rounded-pill">6 hari lagi</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Notifikasi Terbaru</h5>
+                        <div id="notifications">
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> Jadwal konseling minggu depan telah dirilis.
+                            </div>
+                            <div class="alert alert-success">
+                                <strong>Selamat!</strong> Kamu telah menyelesaikan modul Manajemen Waktu.
+                            </div>
+                            <div class="alert alert-warning">
+                                <strong>Pengingat!</strong> Jangan lupa mengumpulkan tugas refleksi diri.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Pencapaian Terbaru</h5>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <i class='bx bxs-medal bx-lg me-3' style="color: var(--secondary-color);"></i>
+                        <div>
+                            <h6 class="mb-0">Konsisten Hadir</h6>
+                            <small class="text-muted">Hadir 30 hari berturut-turut</small>
+                        </div>
+                    </div>
+                    <span class="badge bg-success">Baru</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class='bx bxs-award bx-lg me-3' style="color: var(--secondary-color);"></i>
+                        <div>
+                            <h6 class="mb-0">Pemecah Masalah</h6>
+                            <small class="text-muted">Menyelesaikan 50 studi kasus</small>
+                        </div>
+                    </div>
+                    <span class="badge bg-info">Level 2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function adjustContentPadding() {
+    if (window.innerWidth < 768) {
+        document.querySelector('.content').style.paddingTop = document.querySelector('.navbar').offsetHeight + 'px';
+    } else {
+        document.querySelector('.content').style.paddingTop = '0';
+    }
+}
+
+window.addEventListener('load', adjustContentPadding);
+window.addEventListener('resize', adjustContentPadding);
+</script>
+
+</body>
+</html>
